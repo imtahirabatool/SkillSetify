@@ -18,15 +18,17 @@ export default function PricingSection(){
   };
 
   return (
-    <section className="w-full max-w-4xl mx-auto px-4 py-8">
-      <Typography variant="h4" className="mb-5 text-center">
+    <section className="w-full max-w-4xl mx-auto px-4 py-8"
+    style={{ backgroundColor: "#caebe1",
+     }}>
+      <Typography variant="h4" className="mb-5 text-center font-bold text-[#257860]">
         Choose Your Plan
       </Typography>
       <br />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Basic Plan */}
         <Card
-          className="bg-white text-black shadow-lg text-center"
+          className="bg-[#257860] text-white shadow-lg text-center"
         >
           <CardContent>
             <Typography variant="h5" component="div" gutterBottom>
@@ -45,6 +47,8 @@ export default function PricingSection(){
               color="primary"
               className="mt-4"
               onClick={handleSubmit}
+              style={{ backgroundColor: "#caebe1",
+                color: "#257860" }}
             >
               Get Started
             </Button>
@@ -54,7 +58,7 @@ export default function PricingSection(){
         {/* Pro Plan */}
         <Card
           
-          className="bg-white text-black text-center shadow-lg"
+          className="bg-[#257860] text-white text-center shadow-lg"
         >
           <CardContent>
             <Typography variant="h5" component="div" gutterBottom>
@@ -72,6 +76,8 @@ export default function PricingSection(){
               color="secondary"
               className="mt-4"
               onClick={handleSubmit}
+              style={{ backgroundColor: "#caebe1",
+              color: "#257860" }}
             >
               Upgrade to Pro
             </Button>

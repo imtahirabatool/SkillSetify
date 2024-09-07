@@ -6,9 +6,13 @@ import { Box, Typography } from "@mui/material";
 export default function Footer() {
   return (
     <Box
-      sx={{ mt: 4, textAlign: "center", borderTop: "1px solid #333", py: 3 }}
+      sx={{ mt: 4, textAlign: "center", borderTop: "1px solid white", py: 3 ,
+          backgroundSize: "cover",
+          backgroundColor: "#257860",
+          backgroundPosition: "center",
+      }}
     >
-      <Typography variant="body2" sx={{ color: "#A9A9A9" }}>
+      <Typography variant="body2" sx={{ color: "white" }}>
         &copy; {new Date().getFullYear()} Skillsetify. All rights are reserved.
       </Typography>
     </Box>
