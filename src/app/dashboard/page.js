@@ -1,28 +1,11 @@
 "use client";
-import Head from "next/head";
-import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import PricingSection from "./components/priceSection";
+import Header from "./../components/header";
+import Footer from "./../components/footer";
+import PricingSection from "./../components/priceSection";
 
-export default function Home() {
-  const router = useRouter();
-  const { isSignedIn } = useUser();
-
-  const handleGetStarted = () => {
-    if (isSignedIn) {
-      router.push("/dashboard");
-    } else {
-      router.push("/sign-in");
-    }
-  };
-
+export default function Dashboard() {
   return (
-    <div>
-      <Head>
-        <title>Skillsetify</title>
-      </Head>
+    <div className="container">
       <Header />
       <main
         className="flex flex-col items-center justify-center"
@@ -45,11 +28,8 @@ export default function Home() {
               An AI integrated resume builder that helps you get hired at your
               dream companies.
             </h5>
-            <button
-              className="bg-gray-300 text-black p-4 rounded-full font-bold mt-5"
-              onClick={handleGetStarted}
-            >
-              Get Started
+            <button className="bg-gray-300 text-black p-4 rounded-full font-bold mt-5">
+              Create Resume
             </button>
           </div>
 
