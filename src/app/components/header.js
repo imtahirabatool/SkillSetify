@@ -3,9 +3,9 @@ import { UserButton, SignedOut, SignInButton, SignedIn, useUser } from "@clerk/n
 import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
-  const { isSignedIn } = useUser(); // Clerk hook to check user sign-in status
+  const { isSignedIn } = useUser();
   const router = useRouter();
-  const pathname = usePathname(); // Hook to get the current path
+  const pathname = usePathname();
 
   // Handler for navigating to Home
   const handleHomeClick = () => {
@@ -19,7 +19,8 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center p-5"
-      style={{ backgroundColor: "#257860" }}>
+      style={{ backgroundColor: "#092419" ,
+      borderBottom: "1px solid white",}}>
       <h1 className="text-3xl font-bold text-gray-100">
         <a href="/">SkillSetify</a>
       </h1>

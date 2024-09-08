@@ -30,43 +30,34 @@ const TemplatePopup = ({
 }) => {
   if (!show) return null;
 
-  return (
+  return  (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-          Select a Template
-        </h2>
-        <button
-          onClick={onClose}
-          className="absolute text-black text-xl"
-        >
-          <FaTimes />
-        </button>
+    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl max-h-[75vh] md:max-h-[70vh] overflow-y-auto relative">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-4">
+        Select a Template
+      </h2>
+      <button onClick={onClose} className="absolute top-4 right-4 text-black text-lg md:text-xl">
+        <FaTimes />
+      </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {templates.map((template) => {
-            const TemplateComponent = template.component;
-            return (
-              <div
-                key={template.id}
-                className="border p-4 bg-gray-100 rounded-lg shadow-md cursor-pointer hover:bg-gray-200"
-                onClick={() => onSelect(template.id)}
-              >
-                <TemplateComponent
-                  person={person}
-                  lang={lang}
-                  contactLinks={contactLinks}
-                />
-                <h3 className="text-lg font-semibold text-gray-700 mt-4">
-                  {template.name}
-                </h3>
-                <p className="text-sm text-gray-500">{template.description}</p>
-              </div>
-            );
-          })}
-        </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {templates.map((template) => {
+          const TemplateComponent = template.component;
+          return (
+            <div
+              key={template.id}
+              className="border p-4 bg-gray-100 rounded-lg shadow-md cursor-pointer hover:bg-gray-200"
+              onClick={() => onSelect(template.id)}
+            >
+              <TemplateComponent person={person} lang={lang} contactLinks={contactLinks} />
+              <h3 className="text-lg font-semibold text-gray-700 mt-4">{template.name}</h3>
+              <p className="text-sm text-gray-500">{template.description}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
+  </div>
   );
 };
 

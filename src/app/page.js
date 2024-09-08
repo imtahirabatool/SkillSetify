@@ -36,13 +36,14 @@ export default function Home() {
             "url('https://i.makeagif.com/media/4-01-2016/03wypQ.gif')",
           height: "100vh",
           width: "100vw",
+          paddingBottom: { xs: "50px" },
         }}
       >
         <div className="flex flex-col md:flex-row items-center justify-between h-screen w-screen">
           <div className="w-full md:w-2/3 flex flex-col items-center justify-center">
             <h1
               className="text-3xl sm:text-3xl items-center md:text-4xl font-bold capitalize mt-[50px] md:mt-[0] text-center md:text-left text-white"
-              style={{ color: "#257860" }}
+              style={{ color: "white" }}
             >
               <Typewriter
                 options={{
@@ -73,11 +74,11 @@ export default function Home() {
             </button>
           </div>
 
-          <div className="w-full md:w-1/3 flex items-center justify-center mt-10 md:mt-0 md:ml-20 pr-[100px]">
+          <div className="w-full md:w-1/3 flex items-center justify-center mt-10 md:mt-0 md:ml-20 pr-0 md:pr-[100px]">
             <img
               src="https://www.realtimecv.com/images/scanner.gif"
               alt="Resume Builder Preview"
-              className="w-full h-auto object-cover max-w-[300px] md:max-w-full"
+              className="w-full h-auto object-cover max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-full mb-20 sm:mb-12 md:mb-16"
               style={{
                 borderRadius: "35px",
               }}

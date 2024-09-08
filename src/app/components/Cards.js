@@ -6,14 +6,14 @@ const Cards = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#000000",
+        backgroundColor: "#21201d",
         color: "#D3D3D3",
         padding: { xs: "50px 20px", md: "70px 80px" },
         textAlign: "center",
         backgroundSize: "cover",
-          backgroundColor: "#257860",
           backgroundPosition: "center",
           margin: "0px",
+          borderTop:"1px solid white"
       }}
       >
       <Container maxWidth="lg">
@@ -34,7 +34,6 @@ const Cards = () => {
           <Grid item xs={12} md={4}>
             <Box
               sx={{
-                backgroundColor: "#caebe1", // Dark card background
                 borderRadius: "8px",
                 color: "black",
                 padding: "30px",
@@ -42,12 +41,15 @@ const Cards = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                minHeight: "100px", // Ensures all cards have the same minimum height
+                minHeight: "100px",
+                backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WK9T-KpypoHLFzRC8t_7arDoeP7kydsgQA&s')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
             >
               <Typography
                 variant="h6"
-                sx={{ color: "#257860", marginBottom: "16px" }}
+                sx={{ color: "#257860", marginBottom: "16px" , fontWeight: "bold"}}
               >
                 Easy Resume Input
               </Typography>
@@ -65,19 +67,21 @@ const Cards = () => {
           <Grid item xs={12} md={4}>
             <Box
               sx={{
-                backgroundColor: "#caebe1", // Dark card background
                 borderRadius: "8px",
                 padding: "30px",
                 boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                minHeight: "100px", // Ensures all cards have the same minimum height
+                minHeight: "100px", 
+                backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WK9T-KpypoHLFzRC8t_7arDoeP7kydsgQA&s')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
             >
               <Typography
                 variant="h6"
-                sx={{ color: "#257860", marginBottom: "16px" }}
+                sx={{ color: "#257860", marginBottom: "16px", fontWeight: "bold" }}
               >
                 Smart Resume Suggestions
               </Typography>
@@ -95,19 +99,21 @@ const Cards = () => {
           <Grid item xs={12} md={4}>
             <Box
               sx={{
-                backgroundColor: "#caebe1", // Dark card background
                 borderRadius: "8px",
                 padding: "30px",
                 boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                minHeight: "150px", // Ensures all cards have the same minimum height
+                minHeight: "150px",
+                backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WK9T-KpypoHLFzRC8t_7arDoeP7kydsgQA&s')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
             >
               <Typography
                 variant="h6"
-                sx={{ color: "#257860", marginBottom: "16px" }}
+                sx={{ color: "#257860", marginBottom: "16px",  fontWeight: "bold" }}
               >
                 Resume Generated in Minutes
               </Typography>
