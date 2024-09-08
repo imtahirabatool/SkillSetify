@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaBars } from "react-icons/fa";
 import TemplatePopup from "./TemplatePopup";
 import Image from "next/image";
+import { GrSelection } from "react-icons/gr";
 
 
 const Sidebar = ({ onTemplateSelect, selectedTemplate }) => {
@@ -25,10 +26,10 @@ const Sidebar = ({ onTemplateSelect, selectedTemplate }) => {
 
       {/* Button to open the template selection popup */}
       <button
-        onClick={() => setShowPopup(true)}
-        className="flex items-center p-2 bg-green-500 text-white rounded-md mb-4 hover:bg-green-600"
+        onClick={toggleSidebar}
+        className="md:hidden flex items-center p-2 bg-green-700 text-white rounded-md mb-4 hover:bg-green-800"
       >
-        <FaPlus className="mr-2" />
+        <GrSelection className="mr-2" />
         Select Template
       </button>
 

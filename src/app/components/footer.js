@@ -6,9 +6,9 @@ import { Box, Typography } from "@mui/material";
 export default function Footer() {
   return (
     <Box
-      sx={{ mt: 4, textAlign: "center", borderTop: "1px solid white", py: 3 ,
+      sx={{ mt: 4, textAlign: "center", borderTop: "1px solid white", py: 3 ,marginTop:"-50px",
           backgroundSize: "cover",
-          backgroundColor: "#257860",
+          backgroundColor: "#092419",
           backgroundPosition: "center",
       }}
     >
