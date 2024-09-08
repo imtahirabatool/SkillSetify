@@ -21,7 +21,7 @@ export default function Header() {
     <header className="flex justify-between items-center p-5"
       style={{ backgroundColor: "#257860" }}>
       <h1 className="text-3xl font-bold text-gray-100">
-        <a href="/">Skillsetify</a>
+        <a href="/">SkillSetify</a>
       </h1>
       
       <div className="flex items-center">

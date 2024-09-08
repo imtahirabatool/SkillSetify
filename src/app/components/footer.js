@@ -13,7 +13,7 @@ export default function Footer() {
       }}
     >
       <Typography variant="body2" sx={{ color: "white" }}>
-        &copy; {new Date().getFullYear()} Skillsetify. All rights are reserved.
+        &copy; {new Date().getFullYear()} SkillSetify. All rights are reserved.
       </Typography>
     </Box>
   );
