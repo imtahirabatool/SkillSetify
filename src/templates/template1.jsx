@@ -7,160 +7,148 @@ const Template1 = ({ resumeData }) => {
   const targetRef = useRef();
   const resumeRef = useRef(null);
 
-  // Define page sizes
-  // const pageSizes = {
-  //   us: {
-  //     width: '8.5in',
-  //     height: '11in',
-  //   }
-  // };
 
-  // // Choose the page size based on your preference (us or eu)
-  // const pageSize = pageSizes.us; // or pageSizes.eu for European size
 
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
-  const generatePDF = () => {
-    console.log("Starting PDF generation");
-    setIsGeneratingPDF(true);
-  
-    try {
-      const pdf = new jsPDF();
-      let yPos = 20;
-  
-      // Helper function to add a line
-      const addLine = (y) => {
-        pdf.setDrawColor(0);
-        pdf.setLineWidth(0.5);
-        pdf.line(10, y, 200, y);
-      };
-  
-      // Header
-      pdf.setFontSize(24);
+const generatePDF = () => {
+  console.log("Starting PDF generation");
+  setIsGeneratingPDF(true);
+
+  try {
+    const pdf = new jsPDF();
+    let yPos = 20;
+
+    // Helper function to add a line with a margin
+    const addLine = (y) => {
+      pdf.setDrawColor(0);
+      pdf.setLineWidth(0.5);
+      pdf.line(10, y, 200, y);
+      return y + 15; // Add margin below the line (7 is the margin value)
+    };
+
+    // Header
+    pdf.setFontSize(24);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(fullName, 10, yPos);
+    yPos += 10;
+
+    // Job Title and Contact Info
+    pdf.setFontSize(10);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text(jobTitle, 10, yPos);
+    yPos += 5;
+    const contactInfo = `${phone} | ${email} | ${address}`;
+    pdf.text(contactInfo, 10, yPos);
+    yPos += 10;
+
+    // Education
+    yPos = addLine(yPos); // Add line with margin
+    pdf.setFontSize(14);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text("EDUCATION", 10, yPos);
+    yPos += 7;
+
+    education.forEach((edu) => {
+      pdf.setFontSize(11);
       pdf.setFont('helvetica', 'bold');
-      pdf.text(fullName, 10, yPos);
-      yPos += 10;
-  
-      // Job Title and Contact Info
-      pdf.setFontSize(10);
+      pdf.text(edu.institution, 10, yPos);
       pdf.setFont('helvetica', 'normal');
-      pdf.text(jobTitle, 10, yPos);
+      pdf.text(edu.graduationDate, 200, yPos, { align: 'right' });
       yPos += 5;
-      const contactInfo = `${phone} | ${email} | ${address}`;
-      pdf.text(contactInfo, 10, yPos);
-      yPos += 10;
-  
-      // Education
-      addLine(yPos);
-      yPos += 5;
-      pdf.setFontSize(14);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text("EDUCATION", 10, yPos);
+      pdf.setFontSize(10);
+      pdf.text(edu.degree, 10, yPos);
       yPos += 7;
-  
-      education.forEach((edu) => {
-        pdf.setFontSize(11);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text(edu.institution, 10, yPos);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(edu.graduationDate, 200, yPos, { align: 'right' });
-        yPos += 5;
-        pdf.setFontSize(10);
-        pdf.text(edu.degree, 10, yPos);
-        yPos += 7;
-      });
-  
-      // Work Experience
-      yPos += 3;
-      addLine(yPos);
-      yPos += 5;
-      pdf.setFontSize(14);
+    });
+
+    // Work Experience
+    yPos += 3;
+    yPos = addLine(yPos); // Add line with margin
+    pdf.setFontSize(14);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text("WORK EXPERIENCE", 10, yPos);
+    yPos += 7;
+
+    experience.forEach((exp) => {
+      pdf.setFontSize(11);
       pdf.setFont('helvetica', 'bold');
-      pdf.text("WORK EXPERIENCE", 10, yPos);
-      yPos += 7;
-  
-      experience.forEach((exp) => {
-        pdf.setFontSize(11);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text(exp.company, 10, yPos);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(`${exp.startDate} - ${exp.endDate}`, 200, yPos, { align: 'right' });
-        yPos += 5;
-        pdf.setFontSize(10);
-        pdf.setFont('helvetica', 'italic');
-        pdf.text(exp.title, 10, yPos);
-        yPos += 5;
-  
-        const descLines = pdf.splitTextToSize(exp.description, 180);
-        descLines.forEach((line, index) => {
-          if (index === 0) {
-            pdf.text(`• ${line}`, 15, yPos);
-          } else {
-            pdf.text(line, 17, yPos);
-          }
-          yPos += 5;
-        });
-  
+      pdf.text(exp.company, 10, yPos);
+      pdf.setFont('helvetica', 'normal');
+      pdf.text(`${exp.startDate} - ${exp.endDate}`, 200, yPos, { align: 'right' });
+      yPos += 5;
+      pdf.setFontSize(10);
+      pdf.setFont('helvetica', 'italic');
+      pdf.text(exp.title, 10, yPos);
+      yPos += 5;
+
+      const descLines = pdf.splitTextToSize(exp.description, 180);
+      descLines.forEach((line, index) => {
+        if (index === 0) {
+          pdf.text(`• ${line}`, 15, yPos);
+        } else {
+          pdf.text(line, 17, yPos);
+        }
         yPos += 5;
       });
-  
-      // Skills
-      addLine(yPos);
+
       yPos += 5;
+    });
+
+    // Skills
+    yPos = addLine(yPos); // Add line with margin
+    pdf.setFontSize(14);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text("SKILLS", 10, yPos);
+    yPos += 7;
+
+    pdf.setFontSize(10);
+    pdf.setFont('helvetica', 'normal');
+    const skillsText = skills.join(', ');
+    const skillsLines = pdf.splitTextToSize(skillsText, 180);
+    pdf.text(skillsLines, 10, yPos);
+    yPos += skillsLines.length * 5 + 5;
+
+    // Achievements
+    if (achievements.length > 0) {
+      yPos = addLine(yPos); // Add line with margin
       pdf.setFontSize(14);
       pdf.setFont('helvetica', 'bold');
-      pdf.text("SKILLS", 10, yPos);
+      pdf.text("ACHIEVEMENTS", 10, yPos);
       yPos += 7;
-  
+
       pdf.setFontSize(10);
       pdf.setFont('helvetica', 'normal');
-      const skillsText = skills.join(', ');
-      const skillsLines = pdf.splitTextToSize(skillsText, 180);
-      pdf.text(skillsLines, 10, yPos);
-      yPos += skillsLines.length * 5 + 5;
-  
-      // Achievements
-      if (achievements.length > 0) {
-        addLine(yPos);
-        yPos += 5;
-        pdf.setFontSize(14);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text("ACHIEVEMENTS", 10, yPos);
-        yPos += 7;
-  
-        pdf.setFontSize(10);
-        pdf.setFont('helvetica', 'normal');
-        achievements.forEach((achievement) => {
-          const achLines = pdf.splitTextToSize(`• ${achievement}`, 180);
-          pdf.text(achLines, 10, yPos);
-          yPos += achLines.length * 5 + 2;
-        });
-      }
-  
-      // Summary (if space allows)
-      if (yPos < 250) {
-        addLine(yPos);
-        yPos += 5;
-        pdf.setFontSize(14);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text("PROFESSIONAL SUMMARY", 10, yPos);
-        yPos += 7;
-  
-        pdf.setFontSize(10);
-        pdf.setFont('helvetica', 'normal');
-        const summaryLines = pdf.splitTextToSize(summary, 180);
-        pdf.text(summaryLines, 10, yPos);
-      }
-  
-      console.log("PDF generated, attempting to save");
-      pdf.save('resume.pdf');
-      console.log("PDF saved successfully");
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-    } finally {
-      setIsGeneratingPDF(false);
+      achievements.forEach((achievement) => {
+        const achLines = pdf.splitTextToSize(`• ${achievement}`, 180);
+        pdf.text(achLines, 10, yPos);
+        yPos += achLines.length * 5 + 2;
+      });
     }
-  };
+
+    // Summary (if space allows)
+    if (yPos < 250) {
+      yPos = addLine(yPos); // Add line with margin
+      pdf.setFontSize(14);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text("PROFESSIONAL SUMMARY", 10, yPos);
+      yPos += 7;
+
+      pdf.setFontSize(10);
+      pdf.setFont('helvetica', 'normal');
+      const summaryLines = pdf.splitTextToSize(summary, 180);
+      pdf.text(summaryLines, 10, yPos);
+    }
+
+    console.log("PDF generated, attempting to save");
+    pdf.save('resume.pdf');
+    console.log("PDF saved successfully");
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+  } finally {
+    setIsGeneratingPDF(false);
+  }
+};
+
 
 
   return (

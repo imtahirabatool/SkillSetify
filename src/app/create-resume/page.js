@@ -292,7 +292,7 @@ const ArraySection = ({ label, items, onAdd, renderItem }) => (
       className="mt-2 text-blue-500 underline"
       onClick={onAdd}
     >
-      + Add {label.slice(0, -1)}
+ + Add {label === "Education" ? "Education" : label === "Experience" ? "Experience" : label.slice(0, -1)}
     </button>
   </div>
 );
