@@ -4,10 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import PricingSection from "./components/priceSection";
-import Cards from "./components/Cards";
 import Typewriter from "typewriter-effect";
-import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -25,10 +22,9 @@ export default function Home() {
     <div>
       <Head>
         <title>SkillSetify</title>
-        <link rel="icon" href="/public/images/favico.ico.png" />
       </Head>
       <Header />
-      <main className="flex flex-col items-center justify-center bg-gray-50 overflow-x-hidden">
+      <main className="flex flex-col items-center mb-7 justify-center bg-gray-50 overflow-x-hidden">
         <div className="flex flex-col md:flex-row items-center justify-between h-screen w-screen">
           <div className="w-full md:w-2/3 flex flex-col items-center justify-center">
             <h1
@@ -76,8 +72,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <Cards />
-      <PricingSection />
       <Footer />
     </div>
   );
