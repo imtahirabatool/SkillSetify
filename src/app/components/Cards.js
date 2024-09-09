@@ -6,21 +6,20 @@ const Cards = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#21201d",
+        backgroundColor: "white",
         color: "#D3D3D3",
         padding: { xs: "50px 20px", md: "70px 80px" },
         textAlign: "center",
         backgroundSize: "cover",
           backgroundPosition: "center",
           margin: "0px",
-          borderTop:"1px solid white"
       }}
       >
       <Container maxWidth="lg">
         <Typography
           variant="h4"
           sx={{
-            color: "white", 
+            color: "teal", 
             fontWeight: "bold",
             fontSize: { xs: "2rem", md: "2.5rem" },
             marginBottom: "40px",

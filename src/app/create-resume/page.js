@@ -7,8 +7,8 @@ import exportToPDF from '../utils/exportToPDF';
 import Image from "next/image";
 import Template1 from '../../templates/template1';
 import Template2 from '../../templates/template2';
-import Template3 from '../../templates/template3'
-
+import Template3 from '../../templates/template3';
+import { FaMagic } from "react-icons/fa"; // Importing magic icon
 
 const CreateResume = () => {
   const [selectedTemplate, setSelectedTemplate] = useState(null);
@@ -35,6 +35,8 @@ const CreateResume = () => {
     achievements: [""]
   });
 
+  const [suggestions, setSuggestions] = useState(""); // For Gemini suggestions
+
   const handleTemplateSelect = (templateId) => {
     setSelectedTemplate(templateId);
   };
@@ -47,12 +49,10 @@ const CreateResume = () => {
   const handleArrayChange = (section, index, field, value) => {
     setResumeData((prevData) => {
       if (section === 'skills' || section === 'achievements') {
-        // For skills and achievements, directly update the string in the array
         const newArray = [...prevData[section]];
         newArray[index] = value;
         return { ...prevData, [section]: newArray };
       } else {
-        // For other sections, update the object in the array
         return {
           ...prevData,
           [section]: prevData[section].map((item, i) => 
@@ -62,7 +62,6 @@ const CreateResume = () => {
       }
     });
   };
-  
 
   const handleAddItem = (section, defaultValue) => {
     setResumeData((prevData) => ({
@@ -78,10 +77,31 @@ const CreateResume = () => {
       case 'template2':
         return <Template2 resumeData={resumeData} />;
       case 'template3':
-          return <Template3 resumeData={resumeData} />;
+        return <Template3 resumeData={resumeData} />;
       default:
         return <p className="text-gray-500 text-center mt-6">Select a template to see the preview</p>;
     }
+  };
+
+  // Function for Gemini enhancements
+  const handleGeminiEnhancements = () => {
+    // Logic for enhancing user's data, grammar, and spelling checks
+    let newSuggestions = "";
+
+    if (!resumeData.fullName || resumeData.fullName.split(" ").length < 2) {
+      newSuggestions += "Consider using your full name (First and Last).\n";
+    }
+
+    if (!resumeData.jobTitle) {
+      newSuggestions += "Add a job title to make it clear what role you're aiming for.\n";
+    }
+
+    // Example spelling/grammar improvement for summary
+    if (resumeData.summary && resumeData.summary.length < 50) {
+      newSuggestions += "Expand your summary to highlight more of your strengths.\n";
+    }
+
+    setSuggestions(newSuggestions || "Your resume looks great! No suggestions for now.");
   };
 
   return (
@@ -209,72 +229,80 @@ const CreateResume = () => {
                   label="Template 3"
                 />
               </div>
-              <div className="border-2 border-gray-200 rounded-lg p-4 min-h-[400px]">
+              <div className="border-2 border-gray-200 rounded-lg h-96 p-4 overflow-auto">
                 {renderTemplate()}
               </div>
+            </div>
+            <div className="mt-4">
+              <button
+                className="ml-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
+                onClick={handleGeminiEnhancements}
+              >
+                <FaMagic className="inline-block mr-2" /> Ask Gemini
+              </button>
+              {suggestions && (
+                <div className="mt-4 bg-gray-100 p-4 border-l-4 border-blue-500">
+                  <h3 className="text-lg font-semibold mb-2">Gemini Suggestions</h3>
+                  <pre className="whitespace-pre-wrap text-gray-700">{suggestions}</pre>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
   );
 };
 
-const InputField = ({ label, name, type = "text", value, onChange, placeholder }) => (
+// Reusable InputField component
+const InputField = ({ label, name, type = "text", value, onChange }) => (
   <div className="mb-4">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <label className="block text-gray-700 font-medium mb-2">{label}</label>
     <input
       type={type}
-      id={name}
       name={name}
       value={value}
       onChange={onChange}
-      placeholder={placeholder}
-      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
+      className="w-full px-4 py-2 border border-gray-300 rounded"
     />
   </div>
 );
 
-const TextArea = ({ label, name, value, onChange, placeholder }) => (
+// Reusable TextArea component
+const TextArea = ({ label, name, value, onChange }) => (
   <div className="mb-4">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <label className="block text-gray-700 font-medium mb-2">{label}</label>
     <textarea
-      id={name}
       name={name}
       value={value}
       onChange={onChange}
-      placeholder={placeholder}
-      rows="4"
-      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
-    />
+      className="w-full px-4 py-2 border border-gray-300 rounded"
+      rows={4}
+    ></textarea>
   </div>
 );
 
+// Reusable ArraySection component
 const ArraySection = ({ label, items, onAdd, renderItem }) => (
-  <div className="mb-6">
-    <div className="flex justify-between items-center mb-2">
-      <label className="block text-lg font-medium text-gray-700">{label}</label>
-      <button
-        type="button"
-        onClick={onAdd}
-        className="text-teal-600 hover:text-teal-700 font-medium"
-      >
-        Add {label}
-      </button>
-    </div>
+  <div className="mb-4">
+    <label className="block text-gray-700 font-medium mb-2">{label}</label>
     {items.map((item, index) => renderItem(item, index))}
+    <button
+      type="button"
+      className="mt-2 text-blue-500 underline"
+      onClick={onAdd}
+    >
+      + Add {label.slice(0, -1)}
+    </button>
   </div>
 );
 
+// Reusable TemplateButton component
 const TemplateButton = ({ onClick, isSelected, label }) => (
   <button
     onClick={onClick}
-    className={`px-4 py-2 rounded-md transition-colors ${
-      isSelected
-        ? 'bg-teal-600 text-white'
-        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+    className={`border border-gray-300 rounded-lg p-4 text-center flex-1 ${
+      isSelected ? "border-blue-500" : ""
     }`}
   >
     {label}

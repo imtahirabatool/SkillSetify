@@ -1,5 +1,11 @@
 "use client";
-import { UserButton, SignedOut, SignInButton, SignedIn, useUser } from "@clerk/nextjs";
+import {
+  UserButton,
+  SignedOut,
+  SignInButton,
+  SignedIn,
+  useUser,
+} from "@clerk/nextjs";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
@@ -18,32 +24,29 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between items-center p-5"
-      style={{ backgroundColor: "#092419" ,
-      borderBottom: "1px solid white",}}>
+    <header className="flex justify-between items-center p-5 bg-gradient-to-r from-white to-teal-600">
       <h1 className="text-3xl font-bold text-gray-100">
-        <a href="/">SkillSetify</a>
+        <a href="/" className="text-teal-600">SkillSetify</a>
       </h1>
-      
+
       <div className="flex items-center">
         <SignedIn>
-          {/* Conditionally show either Home or Dashboard based on the current page */}
           {pathname === "/dashboard" ? (
-            <button 
-              className="text-gray-100 mr-4 hover:underline" 
+            <button
+              className="text-gray-100 mr-4 hover:underline"
               onClick={handleHomeClick}
             >
               Home
             </button>
           ) : (
-            <button 
-              className="text-gray-100 mr-4 hover:underline" 
+            <button
+              className="text-gray-100 mr-4 hover:underline"
               onClick={handleDashboardClick}
             >
               Dashboard
             </button>
           )}
-          
+
           <UserButton />
         </SignedIn>
 
